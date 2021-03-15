@@ -66,5 +66,5 @@ for i in range(len(sum_list)):
 info = {"Max temp": max_temps, "Min temp": min_temps, "Average": average}
 df = pd.DataFrame(info)
 print(df)
-
+df.to_csv("data.csv")
 driver.quit()
