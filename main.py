@@ -10,10 +10,13 @@ URL = "https://www.yr.no/en"
 PATH = "S:\pythonstuff\chromedriver.exe"
 options = webdriver.ChromeOptions()
 options.add_argument("headless")
-driver = webdriver.Chrome(PATH, options=options)
+#driver = webdriver.Chrome(PATH, options=options)
+driver = webdriver.Chrome(PATH)
 driver.get(URL)
 temps = []
 max_temps = []
+min_temps = []
+average = []
 
 SEARCH_BTN = driver.find_element_by_xpath('//*[@id="page-header__search-button"]')
 SEARCH_BTN.click()
@@ -35,18 +38,32 @@ try:
     temperatures = main.find_elements_by_class_name("daily-weather-list-item")
     for temperature in temperatures:
         temperatures_i = temperature.find_element_by_class_name("min-max-temperature__max")
-        temps.append(temperatures_i.text)
-
+        max_temps.append(temperatures_i.text)
+    for temperature_min in temperatures:
+        temperature_j = temperature_min.find_element_by_class_name("min-max-temperature__min")
+        min_temps.append(temperature_j.text)
 except:
     driver.quit()
 
-for i, x in enumerate(temps):
-    temps[i] = x.replace("°", '')
+for i, x in enumerate(max_temps):
+    max_temps[i] = x.replace("°", '')
 
-for i in range(0, len(temps)):
-    temps[i] = int(temps[i])
+for i, x in enumerate(min_temps):
+    min_temps[i] = x.replace("°", '')
 
-info = {"Temperatures": temps}
+for i in range(0, len(max_temps)):
+    max_temps[i] = int(max_temps[i])
+
+for i in range(0, len(min_temps)):
+    min_temps[i] = int(min_temps[i])
+
+sum_list = [i + j for (i, j) in zip(max_temps, min_temps)]
+
+for i in range(len(sum_list)):
+    average.append(sum_list[i]/2)
+
+
+info = {"Max temp": max_temps, "Min temp": min_temps, "Average": average}
 df = pd.DataFrame(info)
 print(df)
 
