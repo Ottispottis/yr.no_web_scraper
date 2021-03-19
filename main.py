@@ -109,6 +109,9 @@ for i, x in enumerate(wind_speed):
 for i, x in enumerate(wind_speed):
     wind_speed[i] = x.replace("m/s", "")
 
+for i in range(len(wind_speed)):
+    wind_speed[i] = int(wind_speed[i])
+
 # combining max and min.
 
 sum_list = [i + j for (i, j) in zip(max_temps, min_temps)]
