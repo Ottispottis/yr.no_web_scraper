@@ -17,6 +17,7 @@ temps = []
 max_temps = []
 min_temps = []
 average = []
+dates = []
 
 SEARCH_BTN = driver.find_element_by_xpath('//*[@id="page-header__search-button"]')
 SEARCH_BTN.click()
@@ -42,6 +43,10 @@ try:
     for temperature_min in temperatures:
         temperature_j = temperature_min.find_element_by_class_name("min-max-temperature__min")
         min_temps.append(temperature_j.text)
+    for date in temperatures:
+        dates_i = date.find_element_by_class_name("date-label")
+        dates.append(dates_i.text)
+
 except:
     driver.quit()
 
@@ -63,7 +68,7 @@ for i in range(len(sum_list)):
     average.append(sum_list[i]/2)
 
 
-info = {"Max temp": max_temps, "Min temp": min_temps, "Average": average}
+info = {"Date": dates, "Max temp": max_temps, "Min temp": min_temps, "Average": average}
 df = pd.DataFrame(info)
 print(df)
 df.to_csv("data.csv")
