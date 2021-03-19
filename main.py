@@ -125,4 +125,3 @@ info = {"Date": dates, "Max temp °C": max_temps, "Min temp °C": min_temps,
 df = pd.DataFrame(info)
 print(df)
 df.to_csv("data.csv")
-
