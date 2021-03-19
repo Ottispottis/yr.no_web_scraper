@@ -18,6 +18,7 @@ from selenium.webdriver.chrome.options import Options
 import pandas as pd
 
 URL = "https://www.yr.no/en"
+# Path to chrome webdriver location, change accordingly
 PATH = "S:\pythonstuff\chromedriver.exe"
 
 options = webdriver.ChromeOptions()
