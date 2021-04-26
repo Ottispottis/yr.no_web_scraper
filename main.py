@@ -60,6 +60,11 @@ WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.CLASS_NAME, "
 SUGGESTED_CLICK = driver.find_element_by_class_name("search-results-list__item")
 SUGGESTED_CLICK.click()
 
+WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, "//*[@id='modalRoot']/div/div[1]/div/t-3-0-7/div/div/div/button")))
+
+POP_UP = driver.find_element_by_xpath("//*[@id='modalRoot']/div/div[1]/div/t-3-0-7/div/div/div/button")
+POP_UP.click()
+
 try:
 
     # Waiting for daily-weather-list__intervals to be loaded before continuing
